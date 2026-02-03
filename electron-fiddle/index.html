@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Text-generation web UI Launcher</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/cyborg/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #0e0f12;
+      }
+      .app-shell {
+        min-height: 100vh;
+        padding: 32px 0 48px;
+      }
+      .card {
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .result-item {
+        cursor: pointer;
+        border-radius: 12px;
+        transition: background 0.15s ease;
+      }
+      .result-item:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+      .log {
+        min-height: 180px;
+        max-height: 220px;
+        overflow: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.85rem;
+        white-space: pre-wrap;
+      }
+      .btn-primary {
+        background: #375a7f;
+        border-color: #375a7f;
+      }
+      .btn-primary:hover {
+        background: #2f4f6f;
+        border-color: #2f4f6f;
+      }
+      .btn-outline-light {
+        border-color: #dee2e6;
+        color: #dee2e6;
+      }
+      .btn-outline-light:hover {
+        background: #dee2e6;
+        color: #060606;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-shell">
+      <div class="container">
+        <div class="d-flex flex-column flex-lg-row align-items-lg-end justify-content-between gap-3 mb-4">
+          <div>
+            <h1 class="mb-2">Text-generation web UI Launcher</h1>
+            <p class="text-secondary mb-0">Search, download, and open the UI without a browser.</p>
+          </div>
+          <div class="alert alert-info mb-0" role="status" data-status-line>Ready.</div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-lg-5">
+            <div class="card h-100">
+              <div class="card-body">
+                <h2 class="h4">Server</h2>
+                <p class="text-secondary">Start the local server, then open the UI inside Electron.</p>
+                <div class="d-flex flex-wrap gap-2">
+                  <button class="btn btn-primary" data-start-server>Start server</button>
+                  <button class="btn btn-outline-light" data-open-webui>Open web UI</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-7">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                  <h2 class="h4 mb-0">Local models</h2>
+                  <button class="btn btn-sm btn-outline-light" data-refresh-models>Refresh</button>
+                </div>
+                <ul class="list-group list-group-flush" data-models-list></ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h2 class="h4">Search models (Hugging Face)</h2>
+                <div class="input-group mb-2">
+                  <input class="form-control" data-search-input placeholder="Search text-generation models" />
+                  <button class="btn btn-outline-light" data-search-button>Search</button>
+                </div>
+                <p class="text-secondary small">Click a result to fill the download box, then press Download.</p>
+                <ul class="list-group list-group-flush mb-3" data-search-results></ul>
+                <div class="input-group mb-3">
+                  <input class="form-control" data-download-id-input placeholder="Download by id (organization/model)" />
+                  <button class="btn btn-primary" data-download-id-button>Download</button>
+                </div>
+                <div class="log bg-dark text-light p-3 rounded" data-download-log></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

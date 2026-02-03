@@ -30,7 +30,9 @@ def get_file(args):
 
     print(f"Downloading file {idx} of {tot}...")
     r = requests.get(url, stream=True)
-    with open(output_folder / Path(url.split('/')[-1]), 'wb') as f:
+    # Remove query parameters from filename
+    filename = url.split('/')[-1].split('?')[0]
+    with open(output_folder / Path(filename), 'wb') as f:
         total_size = int(r.headers.get('content-length', 0))
         block_size = 1024
         t = tqdm.tqdm(total=total_size, unit='iB', unit_scale=True)
